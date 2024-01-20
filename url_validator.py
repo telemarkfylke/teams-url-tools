@@ -30,7 +30,7 @@ for i in range(len(good_files)):
     try:
         response = requests.get(url)
         if response.status_code == 403:
-            bad_urls.append({"msg": "Krever autentiserings - Må sjekkes manuelt", "status_code": response.status_code ,  "url": url, "url-fil": good_files[i]})
+            bad_urls.append({"msg": "Krever autentisering - Må sjekkes manuelt", "status_code": response.status_code ,  "url": url, "url-fil": good_files[i]})
         elif response.status_code == 400:
             bad_urls.append({"msg": "Bad request", "status_code": response.status_code ,  "url": url})
         elif response.status_code == 200:
@@ -46,7 +46,7 @@ for i in range(len(good_files)):
 print("Antall lenker:", antallLenker)
 
 # Write bad urls to file
-with open("bad_urls.json", 'w') as new_file:
+with open("url_info.json", 'w') as new_file:
     new_file.write(str(bad_urls))
 
 
