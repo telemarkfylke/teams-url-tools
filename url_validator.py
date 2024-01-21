@@ -1,3 +1,7 @@
+# Program for å sjekke om alle url-filer i en mappestruktur fungerer
+# Programmet skriver ut en liste med alle url med statuskode og filnavn
+# Resultatet skrives til filen "url_info.json"
+
 import requests
 import os
  
@@ -30,16 +34,16 @@ for i in range(len(good_files)):
     try:
         response = requests.get(url)
         if response.status_code == 403:
-            bad_urls.append({"msg": "Krever autentisering - Må sjekkes manuelt", "status_code": response.status_code ,  "url": url, "url-fil": good_files[i]})
+            bad_urls.append({"msg": "Krever autentisering - Må sjekkes manuelt", "status_code": response.status_code ,  "url": url, "url-fil": good_files[i], "manuell_sjekk": "OK"})
         elif response.status_code == 400:
-            bad_urls.append({"msg": "Bad request", "status_code": response.status_code ,  "url": url})
+            bad_urls.append({"msg": "Bad request", "status_code": response.status_code ,  "url": url, "manuell_sjekk": "OK"})
         elif response.status_code == 200:
-            bad_urls.append({"msg": "Jøss, hva skjedde her da?", "status_code": response.status_code ,  "url": url})
+            bad_urls.append({"msg": "Jøss, hva skjedde her da?", "status_code": response.status_code ,  "url": url, "manuell_sjekk": "OK"})
         else:
-            bad_urls.append({"msg": "Udefinert", "status_code": response.status_code ,  "url": url})
+            bad_urls.append({"msg": "Udefinert", "status_code": response.status_code ,  "url": url, "manuell_sjekk": "OK"})
     except requests.exceptions.RequestException as e:
         print("Blæ, noe gikk skikkelig galt")
-        bad_urls.append({"msg": "Her gikk det skikkelig galt", "status_code": "ERROR",  "url": url})
+        bad_urls.append({"msg": "Her gikk det skikkelig galt", "status_code": "ERROR",  "url": url, "manuell_sjekk": "OK"})
     print("Ferdig med fil:", good_files[i])
     antallLenker += 1
 

@@ -1,6 +1,6 @@
-import os
- 
 # Programmet bytter ut en gammel lenke med en ny lenke i alle url-filer i en mappestruktur
+
+import os
 
 # Globale variabler for å holde styr diverse info
 path = "./General" # Stien til mappen som inneholder alle url-filene
